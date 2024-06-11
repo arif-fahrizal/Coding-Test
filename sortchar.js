@@ -1,41 +1,20 @@
-const vowels = vowels => {
-    const str = vowels.toLowerCase().match(/[aiueo]/g), 
-    obj = {}, text = []
+let voc = [], con = []
 
-    for (let i = 0; i < str.length; i++) {
-        if (!obj[str[i]]) {
-            obj[str[i]] = [];
+const sortChar = text => {
+    const str = text.toLowerCase().replace(/[ ]/g, '').split(''), obj = {}
+
+    str.map(a => { 
+        for(let i of a){
+             obj[i] ? obj[i] += 1 : obj[i] = 1
         }
-        obj[str[i]]++;
+    })
+
+    for(let i in obj) {
+        i.match(/[aiueo]/g) ? voc.push(i.repeat(obj[i])) : con.push(i.repeat(obj[i]))
     }
+}
 
-    for (const [key, value] of Object.entries(obj)) {
-        for (let i = 0; i < value; i++) {
-            text.push(key);
-        }
-    }
+sortChar('Next Case')
 
-    return text.join('')
-};
-
-const consonant = consonant => {
-    const str = consonant.toLowerCase().match(/[bcdfghjklmnpqrstvwxyz]/g);
-    const obj = {}, text = []
-
-    for (let i = 0; i < str.length; i++) {
-        if (!obj[str[i]]) {
-            obj[str[i]] = [];
-        }
-        obj[str[i]]++;
-    }
-
-    for (const [key, value] of Object.entries(obj)) {
-        for (let i = 0; i < value; i++) {
-            text.push(key);
-        }
-    }
-    return text.join('')
-};
-
-console.log(vowels('Sample Case'))
-console.log(consonant('Sample Case'))
+console.log(voc.join(''))
+console.log(con.join(''))
